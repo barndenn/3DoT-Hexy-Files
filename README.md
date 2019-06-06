@@ -1,3 +1,10 @@
+# Hexy To Do List
+- Test new pinouts using a 3DoT board 
+- Order PCBs 
+- Assemble the shield 
+- Test the shield 
+- Figure out how to turn without bobbing 
+
 # Pin Initialization
 |Shield Input|Pin Configurations|Pin # (Arduino)|Pin # (ATmega32U4)|
 |---|---|---|---|
