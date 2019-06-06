@@ -1,19 +1,11 @@
 # Pin Initialization
-Shaft Encoder L (OUT A) - D14, (MISO/PCINT3) PB3
+|Shield Input|Pin Configurations|Pin # (Arduino)|Pin # (ATmega32U4)|
+|---|---|---|---|
+|Shaft Encoder L (OUT A)|PDO/PCINT3/MISO|D14|PB3|
+|Shaft Encoder L (OUT B)|PDI/PCINT2/MOSI|D16|PB2|
+|Shaft Encoder R (OUT A)|PCINT1/SCLK|D15|PB1|
+|Shaft Encoder R (OUT B)|SS/PCINT0|D17|PB0|
+|Gear Sens L|SDA/INT1|D2|PD1|
+|Gear Sens R|OC0B/SCL/INT0|D3|PD0
 
-Shaft Encoder L (OUT B) - D16, (MOSI/PCINT2) PB2
-
-Shaft Encoder R (OUT A) - D15, (SCLK/PCINT1) PB1
-
-Shaft Encoder R (OUT B) - D17, (SS/PCINT0) PB0
-
-
-Outputs from shaft encoders need to be read using pin change interrupts. 
-
-
-Gear Sens L - D2, (SDA/INT1) PD1
-
-Gear Sens R - D3, (SCL/INT0) PD0
-
-
-Hall effect sensor outputs can be read using analogRead. 
+Shaft Encoder inputs will be read from a pin change interrupt. Gear sensors can be read using analogRead on any digital pin. 
