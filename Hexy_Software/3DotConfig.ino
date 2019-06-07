@@ -7,11 +7,11 @@ void Init3DoT() {
   pinMode(BIN1,OUTPUT);
   pinMode(BIN2,OUTPUT);
   pinMode(PWMB,OUTPUT);
-
-  // Ulrasonic Sensors
-//  pinMode(trigPin, OUTPUT);
-//  pinMode(echoPin, INPUT);
-
+/*
+  // Ultrasonic Sensors
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+*/
   //Absolute phase encoder
   pinMode(phaR, INPUT_PULLUP);
   pinMode(phaL, INPUT_PULLUP);

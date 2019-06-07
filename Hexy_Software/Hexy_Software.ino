@@ -1,23 +1,21 @@
 #include <PID_v1.h>
 
 // Motor Driver Definitions 
-const int AIN1 = 8;          
-const int AIN2 = 7;          
-const int PWMA = 5;  
-const int STBY = 9; 
-const int BIN1 = 10;  
-const int BIN2 = 11;
-const int PWMB = 6;  
+#define AIN1 8; 
+#define AIN2 7; 
+#define PWMA 5; 
+#define PWMB 6; 
+#define STBY 9; 
+#define BIN1 10; 
+#define BIN2 11;   
 
-// Shaft Encoder Definitions
-const int outAR = 2; // Right Motor Outputs
-const int outBR = 19;
+// Shaft Encoder Definitions (These need external interrupt pins) 
+#define outAR 2; // Right Motor Output
+#define outAL 3; // Left Motor Output
 
-const int outAL = 3;  // Left Motor Outputs
-const int outBL = 18;
-
-const int phaR = A1;  //Absolute phase inputs
-const int phaL = A0;
+// Gear Position Sensor
+#define phaR A1; // Right Gear 
+#define phaL A0; // Left Gear 
 
 uint8_t gearLeft, gearRight, pastGearLeft, pastGearRight;
 uint8_t setupTickL, setupTickR;
