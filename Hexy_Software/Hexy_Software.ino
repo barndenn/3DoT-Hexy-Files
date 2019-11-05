@@ -1,21 +1,24 @@
 #include <PID_v1.h>
+#include <SW_MCP4017.h>
+#include <Wire.h>
 
-// Motor Driver Definitions 
-#define AIN1 8; 
-#define AIN2 7; 
-#define PWMA 5; 
-#define PWMB 6; 
-#define STBY 9; 
-#define BIN1 10; 
-#define BIN2 11;   
+// Pinouts for ATmega32U4
+// Motor Driver Definitions
+#define AIN1 12
+#define AIN2 4
+#define PWMA 6
+#define BIN1 9
+#define BIN2 5
+#define PWMB 10
+#define STBY 8 
 
 // Shaft Encoder Definitions (These need external interrupt pins) 
-#define outAR 2; // Right Motor Output
-#define outAL 3; // Left Motor Output
+#define outAR 2 // Right Motor Output
+#define outAL 3 // Left Motor Output
 
 // Gear Position Sensor
-#define phaR A1; // Right Gear 
-#define phaL A0; // Left Gear 
+#define phaR 14 // Right Gear 
+#define phaL 15 // Left Gear works
 
 uint8_t gearLeft, gearRight, pastGearLeft, pastGearRight;
 uint8_t setupTickL, setupTickR;
@@ -38,8 +41,13 @@ double SetpointR, InputR, OutputR;
 //Specify the links and initial tuning parameters | P,I,D = 2,6,1
 PID myPID_R(&InputR, &OutputR, &SetpointR, 2, 6, 1, DIRECT);
 
+uint8_t dpMaxSteps = 128; //remember even thought the the digital pot has 128 steps it looses one on either end (usually cant go all the way to last tick)
+int maxRangeOhms = 100000; //this is a 5K potentiometer
+MCP4017 i2cDP(MCP4017ADDRESS, dpMaxSteps, maxRangeOhms);
 
 void setup() {
+  //pinMode(A4, OUTPUT);
+  //i2cDP.setSteps(115);
 
   Init3DoT();
   attachInterrupt(digitalPinToInterrupt(outAR), countTicksR, CHANGE);
@@ -125,8 +133,6 @@ void loop() {
 //
 //  rightPWM = Output;
 
-
-
   if (gearRight == 0 && pastGearRight != gearRight){
     Serial.println("Right Phase is zero.");
     Serial.print("Right ticks is:");
@@ -201,7 +207,7 @@ void left_stop(){
 void right_forward(){
   digitalWrite(AIN1,LOW);
   digitalWrite(AIN2,HIGH);
-  analogWrite(PWMA,leftPWM);
+  analogWrite(PWMA,rightPWM);
   digitalWrite(STBY,HIGH);
 }
 
